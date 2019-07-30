@@ -12,7 +12,7 @@ export default function HomeContainer() {
   const [posts, setposts] = useState([])
 
   useEffect(() => {
-    Axios.get('https://writual.herokuapp.com/posts')
+    Axios.get('https://writualapp.herokuapp.com/posts')
       .then(({ data }) => {
         setposts(prevState => {
           return [...prevState, ...data.posts]

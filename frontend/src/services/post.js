@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseURL = 'https://writual.herokuapp.com'
+const baseURL = 'https://writualapp.herokuapp.com'
 
 class ApiService {
   constructor() {
