@@ -1,17 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Editor, EditorState, RichUtils, Modifier, convertToRaw } from 'draft-js'
 import BlockStyleToolbar, { getBlockStyle } from './EditorControls/Header/BlockStyleToolbar'
 import { styles, colorStyleMap, alingStyleMap } from '../../StyleMaps'
 import ColorControls from './EditorControls/Color/ColorControls'
 import AlingControls from './EditorControls/Aling/AlingControls'
-import SaveModal from './SaveModal'
-
-import Axios from 'axios'
+import PublishModal from './PublishModal'
+import Authservice from '../../services/auth'
 import { Button } from 'antd'
+//import MyContext from '../../context'
 
-export default function MyEditor() {
+export default function MyEditor(props) {
+  //const context = useContext(MyContext)
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
   const [contentState, setContentState] = useState('')
+  const [user, setUser] = useState({})
+
+  useEffect(() => {
+    const authservice = new Authservice()
+    authservice
+      .profile()
+      .then(res => {
+        const { user } = res.data
+        setUser(user)
+      })
+      .catch(err => props.props.history.push('/'))
+  }, [props.props.history])
 
   const editor = React.useRef(null)
 
@@ -51,7 +64,7 @@ export default function MyEditor() {
     }, editorState.getCurrentContent())
     let nextEditorState = EditorState.push(editorState, nextContentState, 'change-inline-style')
     const currentStyle = editorState.getCurrentInlineStyle()
-    console.log(currentStyle)
+
     // Unset style override for current color.
     if (selection.isCollapsed()) {
       nextEditorState = currentStyle.reduce((state, color) => {
@@ -92,12 +105,8 @@ export default function MyEditor() {
     const draft = convertToRaw(editorState.getCurrentContent())
     const textDraft = `${JSON.stringify(draft)}`
     return textDraft
-    // setContentState(textDraft)
   }
-  function publish() {
-    const draft = convertToRaw(editorState.getCurrentContent())
-    console.log(JSON.stringify(draft))
-  }
+
   // function getcontent() {
   //   Axios.get('http://localhost:3000/posts')
   //     .then(response => {
@@ -143,7 +152,7 @@ export default function MyEditor() {
         <AlingControls editorState={editorState} onToggle={toggleAling} />
       </div>
 
-      <div style={{ height: '100vh', margin: '20vh', border: '1px solid gray' }}>
+      <div style={{ height: '100vh', margin: '20vh', border: '1px solid gray', overflow: 'scroll' }}>
         <Editor
           customStyleMap={colorStyleMap}
           ref={editor}
@@ -153,9 +162,23 @@ export default function MyEditor() {
           handleKeyCommand={handleKeyCommand}
         />
       </div>
-      <SaveModal contentState={contentState} setContentState={setContentState} save={save} />
+      <PublishModal
+        contentState={contentState}
+        setContentState={setContentState}
+        save={save}
+        user={user}
+        Histprops={props}
+        saveto={'posts'}
+      />
+      <PublishModal
+        contentState={contentState}
+        setContentState={setContentState}
+        save={save}
+        user={user}
+        Histprops={props}
+        saveto={'drafts'}
+      />
 
-      <button onClick={publish}>publish</button>
       <Button type="danger">Cancel</Button>
     </div>
   )

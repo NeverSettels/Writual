@@ -4,7 +4,7 @@ const postSchema = new Schema(
   {
     title: String,
     postedBy: { type: Schema.Types.ObjectId, ref: 'User' },
-    numBookmarks: Number,
+    numBookmarks: { type: Number, default: 0 },
     summary: String,
     categories: [String],
     content: String

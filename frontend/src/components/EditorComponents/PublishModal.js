@@ -1,41 +1,51 @@
 import React, { useState } from 'react'
 import useForm from '../../Hooks/useForm'
 
-import { Modal, Button } from 'antd'
+import { Modal, Button, Alert } from 'antd'
 import CategorySelect from './CategorySelect'
 import Axios from 'axios'
+import ApiService from '../../services/post'
 
-export default function SaveModal(props) {
+export default function PublishModal(props) {
   const [form, handleInputs] = useForm()
   const [categories, setCategories] = useState([])
   const [visible, setvisible] = useState(false)
   const [confirmLoading, setconfirmLoading] = useState(false)
-  const { contentState, save, setContentState } = props
+
+  const { contentState, save, setContentState, user, Histprops, saveto } = props
+  const apiService = new ApiService()
   const showModal = () => {
     setContentState(save())
     setvisible(true)
   }
   const handleOk = () => {
-    Axios.post('http://localhost:3000/posts', { ...form, categories, content: contentState })
-      .then(res => console.log(res))
+    apiService
+      .newPost({ ...form, categories, content: contentState, postedBy: user._id }, saveto)
+      .then(res =>
+        saveto === 'draft' ? (
+          <Alert message="Saved to Drafts" type="success" />
+        ) : (
+          <Alert message="Posted" type="success" />
+        )
+      )
       .catch(err => console.log(err))
 
     setconfirmLoading(true)
     setTimeout(() => {
       setvisible(false)
       setconfirmLoading(false)
-    }, 2000)
+      Histprops.props.history.push('/profile')
+    }, 3000)
   }
 
   const handleCancel = () => {
-    console.log('Clicked cancel button')
     setvisible(false)
   }
 
   return (
     <div>
       <Button type="primary" onClick={showModal}>
-        Save
+        {saveto === 'posts' ? <span>Publish</span> : <span>Save Draft</span>}
       </Button>
       <Modal
         title="Finish Up!"
@@ -49,7 +59,7 @@ export default function SaveModal(props) {
           type="text"
           name="summary"
           placeholder="Add a short Summary"
-          maxlength="140"
+          maxLength="140"
           onChange={e => handleInputs(e)}
         />
         <h3>Choose Categories</h3>

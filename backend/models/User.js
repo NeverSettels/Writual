@@ -3,6 +3,11 @@ const PLM = require('passport-local-mongoose')
 
 const userSchema = new Schema(
   {
+    profilePic: {
+      type: String,
+      default:
+        'https://clipart.wpblink.com/sites/default/files/wallpaper/profile-clipart/180637/profile-clipart-user-profile-180637-2677408.jpg'
+    },
     username: {
       type: String,
       required: true

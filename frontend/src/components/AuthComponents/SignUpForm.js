@@ -40,9 +40,9 @@ export default function SignUpForm() {
     <div>
       <span onClick={showModal}>Sing Up</span>
       <Modal title="Sign Up" visible={visible} onOk={handleOk} confirmLoading={confirmLoading} onCancel={handleCancel}>
-        <input type="text" name="username" placeholder="Name" onChange={e => handleInputs(e)} />
-        <input type="email" name="email" onChange={e => handleInputs(e)} />
-        <input type="password" name="password" onChange={e => handleInputs(e)} />
+        <input type="text" name="username" placeholder="Pick a pen name" onChange={e => handleInputs(e)} />
+        <input type="email" name="email" placeholder="Your Email" onChange={e => handleInputs(e)} />
+        <input type="password" placeholder="Pick a Password" name="password" onChange={e => handleInputs(e)} />
       </Modal>
     </div>
   )

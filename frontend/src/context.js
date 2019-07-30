@@ -1,9 +1,15 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 import AuthService from './services/auth'
 export const MyContext = createContext()
 
 function MyProvider(props) {
-  const authService = new AuthService()
+  useEffect(() => {
+    const authService = new AuthService()
+    authService
+      .profile()
+      .then(prevState => setState({ isLogged: true }))
+      .catch()
+  }, [])
   const [state, setState] = useState({
     user: {},
     isLogged: false
@@ -16,10 +22,7 @@ function MyProvider(props) {
       isLogged: !prevState.isLogged
     }))
   }
-  authService
-    .profile()
-    .then(prevState => setState({ isLogged: true }))
-    .catch()
+
   return (
     <MyContext.Provider
       value={{

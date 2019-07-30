@@ -2,8 +2,11 @@ const { model, Schema } = require('mongoose')
 
 const draftSchema = new Schema(
   {
+    title: {
+      type: String,
+      default: 'Untitled Draft'
+    },
     postedBy: { type: Schema.Types.ObjectId, ref: 'User' },
-    numBookmarks: Number,
     summary: String,
     categories: [String],
     content: String

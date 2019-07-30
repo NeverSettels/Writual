@@ -4,7 +4,7 @@ const { getAllDrafts, getOneDraft, createDraft, updateDraft, deleteDraft } = req
 
 /* GET home page */
 //create
-router.post('/Drafts', createDraft)
+router.post('/drafts', createDraft)
 //read
 router.get('/drafts', getAllDrafts)
 router.get('/drafts/:id', getOneDraft)

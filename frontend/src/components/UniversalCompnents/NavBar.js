@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import Logout from '../AuthComponents/Logout'
 import LoginForm from '../AuthComponents/LoginForm'
 import SignUpForm from '../AuthComponents/SignUpForm'
@@ -10,9 +10,9 @@ export default function NavBar(props) {
 
   return (
     <nav className="nav-bar">
-      <NavLink activeClassName="active" to="/">
-        <span>Home</span>
-      </NavLink>
+      <Link activeClassName="active" to="/">
+        <img style={{ height: '10vh' }} src="/logo.PNG" alt="" />
+      </Link>
       {context.state.isLogged ? (
         <>
           <NavLink activeClassName="active" to="/profile">

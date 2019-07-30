@@ -1,7 +1,9 @@
 const Post = require('../models/Posts')
+const User = require('../models/User')
 
 exports.getAllPosts = (req, res, next) => {
   Post.find()
+    .populate('postedBy')
     .then(posts => res.status(200).json({ posts }))
     .catch(err => res.status(500).json(err))
 }
@@ -15,7 +17,9 @@ exports.getOnePost = (req, res, next) => {
 
 exports.createPost = (req, res, next) => {
   Post.create({ ...req.body })
-    .then(post => res.status(201).json({ post }))
+    .then(({ _id }) => {
+      User.findByIdAndUpdate(req.user._id, { $push: { posts: _id } }).then(res => res.status(201).json({ yolo }))
+    })
     .catch(err => res.status(500).json(err))
 }
 
