@@ -27,7 +27,7 @@ const app = express()
 app.use(
   cors({
     credentials: true,
-    origin: ['https://xenodochial-tereshkova-1df18c.netlify.com']
+    origin: ['https://xenodochial-tereshkova-1df18c.netlify.com', 'http://localhost:3001']
   })
 )
 
