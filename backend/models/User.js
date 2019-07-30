@@ -3,17 +3,23 @@ const PLM = require('passport-local-mongoose')
 
 const userSchema = new Schema(
   {
-    username: String,
-    email: String,
+    username: {
+      type: String,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    },
     role: {
       type: String,
       enum: ['USER', 'ADMIN'],
       default: 'USER'
     },
-    posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }], // Posts ids
-    drafts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Draft' }], // Draft ids
-    following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Following ids
-    bookmarked: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }], // Bookmarked Posts object
+    posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }], // Posts ids
+    drafts: [{ type: Schema.Types.ObjectId, ref: 'Draft' }], // Draft ids
+    following: [{ type: Schema.Types.ObjectId, ref: 'User' }], // Following ids
+    bookmarked: [{ type: Schema.Types.ObjectId, ref: 'Post' }], // Bookmarked Posts object
     bio: String
   },
   {
@@ -22,6 +28,6 @@ const userSchema = new Schema(
   }
 )
 
-userSchema.plugin(PLM, { usernameField: 'username' })
+userSchema.plugin(PLM, { usernameField: 'email' })
 
 module.exports = model('User', userSchema)

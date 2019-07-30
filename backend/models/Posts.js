@@ -2,11 +2,12 @@ const { model, Schema } = require('mongoose')
 
 const postSchema = new Schema(
   {
-    postedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    title: String,
+    postedBy: { type: Schema.Types.ObjectId, ref: 'User' },
     numBookmarks: Number,
     summary: String,
     categories: [String],
-    content: Object
+    content: String
   },
   {
     timestamps: true,

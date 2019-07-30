@@ -8,6 +8,8 @@ const hbs = require('hbs')
 const mongoose = require('mongoose')
 const logger = require('morgan')
 const path = require('path')
+const passport = require('./config/passport')
+const cors = require('cors')
 
 mongoose
   .connect(process.env.DB, { useNewUrlParser: true })
@@ -22,7 +24,14 @@ const app_name = require('./package.json').name
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`)
 
 const app = express()
+app.use(
+  cors({
+    credentials: true,
+    origin: ['http://localhost:3001']
+  })
+)
 
+app.use(passport.initialize())
 // Middleware Setup
 app.use(logger('dev'))
 app.use(bodyParser.json())
@@ -49,5 +58,13 @@ app.locals.title = 'Express - Generated with IronGenerator'
 
 const index = require('./routes/index')
 app.use('/', index)
+const postRoutes = require('./routes/postRoutes')
+app.use('/', postRoutes)
+const draftRoutes = require('./routes/draftRoutes')
+app.use('/', draftRoutes)
+// const commentRoutes = require('./routes/commentRoutes')
+// app.use('/', commentRoutes)
+const auth = require('./routes/authRoutes')
+app.use('/', auth)
 
 module.exports = app

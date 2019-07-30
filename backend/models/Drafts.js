@@ -2,11 +2,11 @@ const { model, Schema } = require('mongoose')
 
 const draftSchema = new Schema(
   {
-    postedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    postedBy: { type: Schema.Types.ObjectId, ref: 'User' },
     numBookmarks: Number,
     summary: String,
     categories: [String],
-    content: Object
+    content: String
   },
   {
     timestamps: true,
