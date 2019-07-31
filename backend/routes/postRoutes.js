@@ -16,7 +16,7 @@ router.post('/posts', verifyToken, createPost)
 //read
 router.get('/posts', getAllPosts)
 router.get('/posts/:category', getByCategory)
-router.get('/posts/:id', getOnePost)
+router.get('/post/:id', getOnePost)
 
 //update
 router.patch('/posts/:id', updatePost)
