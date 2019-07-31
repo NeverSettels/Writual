@@ -18,6 +18,7 @@ exports.getByCategory = (req, res, next) => {
 exports.getOnePost = (req, res, next) => {
   const { id } = req.params
   Post.findById(id)
+    .populate('postedBy')
     .then(post => res.status(200).json({ post }))
     .catch(err => res.status(500).json(err))
 }
