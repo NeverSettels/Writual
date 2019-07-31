@@ -13,7 +13,7 @@ const Router = () => {
         <Route exact path="/" component={HomeContainer} />
         <Route exact path="/create" component={CreateContainer} />
         <Route exact path="/profile" component={HomeContainer} />
-        <Route exact path="/read" component={ReadContainer} />
+        <Route exact path="/read/:id" component={ReadContainer} />
       </Switch>
     </BrowserRouter>
   )

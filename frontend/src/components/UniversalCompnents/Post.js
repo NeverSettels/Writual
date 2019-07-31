@@ -60,13 +60,6 @@ export default function Post(props) {
   }
   function bookmark() {
     bookmarkState()
-    //forceUpdate()
-    //useForceUpdate()
-    // Axios.patch(`https://writualapp.herokuapp.com/posts/${post._id}`, numBookmarks)
-    //   .then(res => {
-    //     console.log(res)
-    //   })
-    //   .catch(err => console.log(err))
   }
   return (
     <div
@@ -107,7 +100,7 @@ export default function Post(props) {
           ''
         )}
 
-        <Link to="/read">read</Link>
+        <Link to={`/read/${post._id}`}>read</Link>
       </div>
     </div>
   )
