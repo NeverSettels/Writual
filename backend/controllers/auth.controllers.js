@@ -33,7 +33,7 @@ exports.profile = (req, res, next) => {
     .then(user => res.status(200).json({ user }))
     .catch(err => res.status(401).json({ err }))
 }
-exports.updatePost = (req, res, next) => {
+exports.update = (req, res, next) => {
   const { id } = req.params
   User.findByIdAndUpdate(id, { ...req.body }, { new: true })
     .then(post => res.status(200).json({ post }))
