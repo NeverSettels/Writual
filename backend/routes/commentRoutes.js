@@ -5,7 +5,7 @@ const { verifyToken } = require('../config/jwt')
 
 /* GET home page */
 //create
-router.post('/comments', verifyToken, createComment)
+router.post('/comments', createComment)
 //read
 router.get('/comments/:id', getComments)
 
