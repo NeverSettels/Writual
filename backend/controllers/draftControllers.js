@@ -15,7 +15,9 @@ exports.getOneDraft = (req, res, next) => {
 
 exports.createDraft = (req, res, next) => {
   Draft.create({ ...req.body })
-    .then(draft => res.status(201).json({ draft }))
+    .then(({ _id }) => {
+      User.findByIdAndUpdate(req.user._id, { $push: { drafts: _id } }).then(res => res.status(201).json({ yolo }))
+    })
     .catch(err => res.status(500).json(err))
 }
 
