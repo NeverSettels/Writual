@@ -25,7 +25,6 @@ exports.createPost = (req, res, next) => {
 
 exports.updatePost = (req, res, next) => {
   const { id } = req.params
-  console.log(id, req.body)
   Post.findByIdAndUpdate(id, { ...req.body }, { new: true })
     .then(post => res.status(200).json({ post }))
     .catch(err => res.status(500).json(err))
