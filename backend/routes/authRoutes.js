@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { signup, login, logout, profile, update } = require('../controllers/auth.controllers')
+const { signup, login, logout, profile, update, getProfile } = require('../controllers/auth.controllers')
 const passport = require('../config/passport')
 const { verifyToken } = require('../config/jwt')
 
@@ -11,6 +11,7 @@ router.get('/logout', logout)
 
 router.get('/profile', verifyToken, profile)
 
-router.patch('/user/:id', update)
+router.get('/profile/:id', getProfile)
+router.patch('/profile/:id', update)
 
 module.exports = router

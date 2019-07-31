@@ -44,3 +44,11 @@ exports.deletePost = (req, res, next) => {
     .then(post => res.status(200).json({ post, msg: 'Post deleted' }))
     .catch(err => res.status(500).json(err))
 }
+
+exports.getUserPosts = (req, res, next) => {
+  const { userId } = req.params
+  Post.find({ _id: userId })
+    .populate('postedBy')
+    .then(posts => res.status(200).json({ posts }))
+    .catch(err => res.status(500).json(err))
+}

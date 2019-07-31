@@ -39,3 +39,10 @@ exports.update = (req, res, next) => {
     .then(post => res.status(200).json({ post }))
     .catch(err => res.status(500).json(err))
 }
+
+exports.getProfile = (req, res, next) => {
+  const { id } = req.params
+  User.findById({ id })
+    .then(user => res.status(200).json({ user }))
+    .catch(err => res.status(401).json({ err }))
+}
