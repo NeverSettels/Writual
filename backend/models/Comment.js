@@ -4,7 +4,7 @@ const commentSchema = new Schema(
   {
     postedBy: { type: Schema.Types.ObjectId, ref: 'User' }, //ObJectId of user that commented
     postedOn: { type: Schema.Types.ObjectId, ref: 'Post' }, //ObJectId of post commented on
-    content: String
+    content: [Object]
   },
   {
     timestamps: true,
