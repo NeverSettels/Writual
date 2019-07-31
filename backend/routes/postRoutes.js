@@ -1,6 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const { getAllPosts, getOnePost, createPost, updatePost, deletePost } = require('../controllers/postControllers')
+const {
+  getAllPosts,
+  getOnePost,
+  createPost,
+  updatePost,
+  deletePost,
+  getByCategory
+} = require('../controllers/postControllers')
 const { verifyToken } = require('../config/jwt')
 
 /* GET home page */
@@ -8,7 +15,7 @@ const { verifyToken } = require('../config/jwt')
 router.post('/posts', verifyToken, createPost)
 //read
 router.get('/posts', getAllPosts)
-router.get('/posts/:category', getAllPosts)
+router.get('/posts/:category', getByCategory)
 router.get('/posts/:id', getOnePost)
 
 //update
