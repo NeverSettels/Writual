@@ -20,6 +20,25 @@ export default function HomeContainer() {
       })
       .catch(err => console.log(err))
   }, [])
+
+  function filter(category) {
+    Axios.get(`https://writualapp.herokuapp.com/posts/${category}`)
+      .then(({ data }) => {
+        setposts(prevState => {
+          return [...data.posts]
+        })
+      })
+      .catch(err => console.log(err))
+  }
+  function filterAll() {
+    Axios.get(`https://writualapp.herokuapp.com/posts`)
+      .then(({ data }) => {
+        setposts(prevState => {
+          return [...data.posts]
+        })
+      })
+      .catch(err => console.log(err))
+  }
   return (
     <Layout>
       <Sider
@@ -39,10 +58,17 @@ export default function HomeContainer() {
           defaultSelectedKeys={['4']}
         >
           <h2 style={{ color: '#D4dfc2' }}>Catgories</h2>
+          <Menu.Item>
+            <h2 className="nav-text" style={{ color: '#D4dfc2' }} onClick={filterAll}>
+              <u>All</u>
+            </h2>
+          </Menu.Item>
           {CATEGORIES.map(category => {
             return (
               <Menu.Item key={category}>
-                <span className="nav-text">{category}</span>
+                <span className="nav-text" onClick={() => filter(category)}>
+                  {category}
+                </span>
               </Menu.Item>
             )
           })}
