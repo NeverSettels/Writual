@@ -11,6 +11,6 @@ router.get('/logout', logout)
 
 router.get('/profile', verifyToken, profile)
 
-router.patch('/user/:id', updatePost)
+router.patch('/user/:id', update)
 
 module.exports = router
