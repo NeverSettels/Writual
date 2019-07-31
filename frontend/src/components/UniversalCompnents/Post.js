@@ -10,30 +10,39 @@ export default function Post(props) {
 
   const [bookmarked, setbookmarked] = useState(false)
   const [user, setUser] = useState({})
-  //const useForceUpdate = () => setbookmarked()[1]
+
   useEffect(() => {
     const authservice = new Authservice()
+
     authservice
       .profile()
       .then(res => {
         const { user } = res.data
         setUser(user)
+        if (user.bookmarked) {
+          console.log(user)
+          let bool = false
+          user.bookmarked.map(marked => {
+            if (post._id === marked) {
+              bool = true
+            }
+          })
+          setbookmarked(bool)
+        }
       })
       .catch(err => console.log(err))
 
-    post.postedBy.bookmarked.map(marked => {
-      if (post._id === marked) {
-        return setbookmarked(true)
-      } else {
-        return setbookmarked(false)
-      }
-    })
-  }, [post._id, post.postedBy.bookmarked])
+
+
+
+
+  }, [])
+
   function bookmarkState() {
     if (bookmarked) {
       setnumBookmarks(prevState => prevState - 1)
       setbookmarked(!bookmarked)
-      Axios.patch(`https://writualapp.herokuapp.com/user/${user._id}`, { $pull: { bookmarked: post._id } })
+      Axios.patch(`https://writualapp.herokuapp.com/profile/${user._id}`, { $pull: { bookmarked: post._id } })
         .then(res => {
           console.log(res)
         })
@@ -41,19 +50,14 @@ export default function Post(props) {
     } else {
       setnumBookmarks(prevState => prevState + 1)
       setbookmarked(!bookmarked)
-      Axios.patch(`https://writualapp.herokuapp.com/user/${user._id}`, { $push: { bookmarked: post._id } })
-        .then(res => {
-          console.log(res)
-        })
+      Axios.patch(`https://writualapp.herokuapp.com/profile/${user._id}`, { $push: { bookmarked: post._id } })
+        .then()
         .catch(err => console.log(err))
     }
   }
   function postBookmark() {
-    console.log(numBookmarks)
     Axios.patch(`https://writualapp.herokuapp.com/posts/${post._id}`, { numBookmarks: numBookmarks })
-      .then(res => {
-        console.log(res)
-      })
+      .then()
       .catch(err => console.log(err))
 
     return numBookmarks
@@ -94,11 +98,11 @@ export default function Post(props) {
               <button onClick={bookmark}>Bookmark</button>
             </p>
           ) : (
-            <button onClick={bookmark}>Bookmark</button>
-          )
+              <button onClick={bookmark}>Bookmark</button>
+            )
         ) : (
-          ''
-        )}
+            ''
+          )}
 
         <Link to={`/read/${post._id}`}>read</Link>
       </div>

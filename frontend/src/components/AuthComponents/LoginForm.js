@@ -21,7 +21,7 @@ export default function LoginForm() {
       .login(form)
       .then(response => {
         console.log(response)
-        context.setUser(response.user)
+        context.setUser(response.data.user)
       })
       .catch(err => {
         console.log(err)
@@ -43,8 +43,8 @@ export default function LoginForm() {
         Login
       </span>
       <Modal title="Login" visible={visible} onOk={handleOk} confirmLoading={confirmLoading} onCancel={handleCancel}>
-        <input type="email" name="email" onChange={e => handleInputs(e)} />
-        <input type="password" name="password" onChange={e => handleInputs(e)} />
+        <input type="email" name="email" placeholder="Enter you email" onChange={e => handleInputs(e)} />
+        <input type="password" name="password" placeholder="Enter you password" onChange={e => handleInputs(e)} />
       </Modal>
     </div>
   )

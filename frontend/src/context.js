@@ -3,17 +3,18 @@ import AuthService from './services/auth'
 export const MyContext = createContext()
 
 function MyProvider(props) {
-  useEffect(() => {
-    const authService = new AuthService()
-    authService
-      .profile()
-      .then(prevState => setState({ isLogged: true }))
-      .catch()
-  }, [])
   const [state, setState] = useState({
     user: {},
     isLogged: false
   })
+  useEffect(() => {
+    const authService = new AuthService()
+    authService
+      .profile()
+      .then(res => setState({ user: res.data.user, isLogged: true }))
+      .catch()
+  }, [])
+
 
   const setUser = user => {
     setState(prevState => ({

@@ -13,9 +13,10 @@ export default function NavBar(props) {
       <Link activeClassName="active" to="/">
         <img style={{ height: '10vh' }} src="/logo.PNG" alt="" />
       </Link>
-      {context.state.isLogged ? (
+      {console.log(context.state)}
+      {context.state.user ? (
         <>
-          <NavLink activeClassName="active" to="/profile">
+          <NavLink activeClassName="active" to={`/profile/${context.state.user._id}`}>
             <span>Profile</span>
           </NavLink>
           <NavLink activeClassName="active" to="/create">
@@ -24,11 +25,11 @@ export default function NavBar(props) {
           <Logout />
         </>
       ) : (
-        <>
-          <LoginForm />
-          <SignUpForm />
-        </>
-      )}
+          <>
+            <LoginForm />
+            <SignUpForm />
+          </>
+        )}
     </nav>
   )
 }
