@@ -8,6 +8,7 @@ const { verifyToken } = require('../config/jwt')
 router.post('/posts', verifyToken, createPost)
 //read
 router.get('/posts', getAllPosts)
+router.get('/posts/:category', getAllPosts)
 router.get('/posts/:id', getOnePost)
 
 //update

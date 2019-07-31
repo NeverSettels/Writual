@@ -7,6 +7,13 @@ exports.getAllPosts = (req, res, next) => {
     .then(posts => res.status(200).json({ posts }))
     .catch(err => res.status(500).json(err))
 }
+exports.getByCategory = (req, res, next) => {
+  const { category } = req.params
+  Post.find({ categories: category })
+    .populate('postedBy')
+    .then(posts => res.status(200).json({ posts }))
+    .catch(err => res.status(500).json(err))
+}
 
 exports.getOnePost = (req, res, next) => {
   const { id } = req.params
