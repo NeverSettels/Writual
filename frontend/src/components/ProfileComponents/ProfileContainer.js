@@ -90,7 +90,7 @@ export default function ProfileContainer(props) {
             </span>
             }
           /> : ''}
-          {posts.length === 0 && !postsOrBookmarked ? <Empty
+          {bookmarked.length === 0 && !postsOrBookmarked ? <Empty
             image="https://image.flaticon.com/icons/svg/864/864702.svg"
             imageStyle={{
               height: 60,
