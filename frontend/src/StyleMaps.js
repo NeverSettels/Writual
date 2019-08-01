@@ -38,7 +38,9 @@ export const styles = {
     fontFamily: "'Georgia', serif",
     fontSize: 14,
     padding: 20,
-    width: 600
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center'
   },
   editor: {
     borderTop: '1px solid #ddd',

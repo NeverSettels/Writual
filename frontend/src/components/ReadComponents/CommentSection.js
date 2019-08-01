@@ -7,7 +7,6 @@ import Axios from 'axios'
 const { TextArea } = Input
 
 const CommentList = ({ comments, post }) => {
-  console.log(comments)
   useEffect(() => {
     if (comments.length === 1) {
       console.log('posted')
@@ -63,15 +62,15 @@ export default function CommentSection(props) {
         setUser(user)
       })
       .catch(err => console.log(err))
-    console.log(post._id)
+
     if (post._id) {
       Axios.get(`https://writualapp.herokuapp.com/comments/${post._id}`)
         .then(({ data }) => {
           if (data.comment) {
             let commentData = []
-            console.log(data.comment.content)
+
             data.comment.content.map(e => commentData.push(e[0].content[0])) /*setComment(data.comments.content)*/
-            console.log(commentData)
+
             //setComment(commentData)
           }
         })

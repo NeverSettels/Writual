@@ -22,7 +22,7 @@ const BlockStyleToolbar = props => {
     .getType()
 
   return (
-    <span className="RichEditor-controls">
+    <span style={{ display: 'flex' }}>
       <HeaderStyleDropdown headerOptions={HEADER_TYPES} active={blockType} onToggle={onToggle} />
       {BLOCK_TYPES.map(type => {
         return (

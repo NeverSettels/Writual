@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Layout, Avatar } from 'antd'
+import { Layout, Avatar, Menu } from 'antd'
 import Axios from 'axios'
-import Post from '../UniversalCompnents/Post'
-import { CATEGORIES } from '../../Types'
+
 import { MyContext } from '../../context'
-import Authservice from '../../services/auth'
+import ProfilePost from './ProfilePost';
+import EditProfileForm from './EditProfileForm';
+
 const { Content, Sider } = Layout
 
 export default function ProfileContainer(props) {
@@ -12,25 +13,37 @@ export default function ProfileContainer(props) {
   const context = useContext(MyContext)
   const [posts, setposts] = useState([])
   const [user, setUser] = useState({})
-
+  const [bookmarked, setbookmarked] = useState([])
+  const [postsOrBookmarked, setpostsOrBookmarked] = useState(true)
+  const [current, setcurrent] = useState('all')
+  const [mine, setmine] = useState(false)
 
   useEffect(() => {
 
 
     Axios.get(`https://writualapp.herokuapp.com/profile/${match.params.id}`)
       .then(({ data }) => {
-        console.log(data.user)
+
+
         setUser(data.user)
+        setposts(data.user.posts)
+        setbookmarked(data.user.bookmarked)
       })
       .catch(err => console.log(err))
 
-
-
-
+    // eslint-disable-next-line
   }, [])
 
 
+
+  const handleClick = e => {
+    console.log('click ', e);
+    setcurrent(e.key)
+    setpostsOrBookmarked(prevState => !prevState)
+
+  };
   return (
+
     <Layout>
       <Sider
         style={{
@@ -50,10 +63,23 @@ export default function ProfileContainer(props) {
       >
         <Avatar size={80} src={user.profilePic} />
         <h2>{user.username}</h2>
+        <div><p>{user.bio}</p></div>
+        {context.state.user._id === user._id && !mine ? setmine(true) : ''}
+        {mine ? <EditProfileForm user={user} setUser={setUser} /> : ''}
+
       </Sider>
       <Layout style={{ marginLeft: 200 }}>
+
         <Content style={{ height: '90vh', margin: '10vh 16px 0', overflow: 'initial' }}>
-          <h1>{user.username}</h1>
+          <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
+            <Menu.Item key="all">
+              My Posts
+        </Menu.Item>
+            <Menu.Item key="bookmarked">
+              Bookmarked
+        </Menu.Item>
+          </Menu>
+          {postsOrBookmarked ? posts.map(post => (<ProfilePost post={post} user={user} mine={mine} />)) : bookmarked.map(post => (<ProfilePost post={post} user={user} mine={false} />))}
         </Content>
       </Layout>
     </Layout>

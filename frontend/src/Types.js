@@ -7,11 +7,12 @@ export var COLORS = [
   { label: 'Indigo', style: 'indigo' },
   { label: 'Violet', style: 'violet' }
 ]
+
 export const BLOCK_TYPES = [
-  { label: ' “ ” ', style: 'blockquote' },
+
   { label: 'UL', style: 'unordered-list-item' },
-  { label: 'OL', style: 'ordered-list-item' },
-  { label: '{ }', style: 'code-block' }
+  { label: '1.', style: 'ordered-list-item' }
+
 ]
 
 export const HEADER_TYPES = [

@@ -3,7 +3,7 @@ import useForm from '../../Hooks/useForm'
 
 import { Modal, Button, Alert } from 'antd'
 import CategorySelect from './CategorySelect'
-import Axios from 'axios'
+
 import ApiService from '../../services/post'
 
 export default function PublishModal(props) {
@@ -25,8 +25,8 @@ export default function PublishModal(props) {
         saveto === 'draft' ? (
           <Alert message="Saved to Drafts" type="success" />
         ) : (
-          <Alert message="Posted" type="success" />
-        )
+            <Alert message="Posted" type="success" />
+          )
       )
       .catch(err => console.log(err))
 
@@ -43,7 +43,7 @@ export default function PublishModal(props) {
   }
 
   return (
-    <div>
+    <>
       <Button type="primary" onClick={showModal}>
         {saveto === 'posts' ? <span>Publish</span> : <span>Save Draft</span>}
       </Button>
@@ -65,6 +65,6 @@ export default function PublishModal(props) {
         <h3>Choose Categories</h3>
         <CategorySelect categories={categories} setCategories={setCategories} />
       </Modal>
-    </div>
+    </>
   )
 }

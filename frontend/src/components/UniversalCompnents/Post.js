@@ -26,6 +26,7 @@ export default function Post(props) {
             if (post._id === marked) {
               bool = true
             }
+            return ('')
           })
           setbookmarked(bool)
         }
@@ -35,7 +36,7 @@ export default function Post(props) {
 
 
 
-
+    // eslint-disable-next-line
   }, [])
 
   function bookmarkState() {
@@ -67,44 +68,45 @@ export default function Post(props) {
   }
   return (
     <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        margin: '10px',
-        border: '1px solid #6a4944',
-        padding: '10px'
-      }}
+      className="post_container"
     >
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Avatar src={post.postedBy.profilePic} />
-        <p>
-          <strong>{post.postedBy.username}</strong>
-        </p>
-      </div>
+      <Link to={`/profile/${post.postedBy._id}`}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingLeft: '5px' }}>
+
+          <Avatar size={60} src={post.postedBy.profilePic} />
+          <p>
+            <strong>{post.postedBy.username}</strong>
+          </p>
+        </div></Link>
+
       <div>
         <h2>{post.title}</h2>
         <p>{post.summary}</p>
-        {post.categories.map(category => (
-          <Tag>{category}</Tag>
-        ))}
+        <div>
+          {post.categories.map(category => (
+            <Tag>{category}</Tag>
+          ))}
+        </div>
       </div>
       <div>
-        <p>{postBookmark()}</p>
+
         {context.state.isLogged ? (
           bookmarked ? (
             <p>
-              <strong>Bookmarked!</strong>
-              <button onClick={bookmark}>Bookmark</button>
+              <img onClick={bookmark} src="/bookmarkFilled.png" alt="BookMarked" />
+
             </p>
           ) : (
-              <button onClick={bookmark}>Bookmark</button>
+              <p>
+                <img onClick={bookmark} src="/bookmarkEmpty.png" alt="BookMarked" />
+
+              </p>
             )
         ) : (
             ''
           )}
-
-        <Link to={`/read/${post._id}`}>read</Link>
+        <p>{postBookmark()}</p>
+        <Link to={`/read/${post._id}`}><img src="./book.png" alt="book" /></Link>
       </div>
     </div>
   )

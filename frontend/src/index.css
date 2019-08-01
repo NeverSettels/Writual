@@ -10,14 +10,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 .nav-bar {
+  margin: 0;
   position: fixed;
-  padding: 10px;
+  padding:  0 20px;
   width: 100vw;
   height: 10vh;
   background-color: #e4dfc2;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1000;
 }
 
 .nav-bar span:hover {
@@ -32,8 +34,42 @@ code {
   height: 10vh;
 }
 
-.active {
+
+.post_container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  border: 1px solid #6a4944;
+  border-radius: 25px;
+  padding: 10px;
+  background-color:  #b49e86;
+  box-shadow: 10px 10px 8px #888888;
+}
+
+.post_container h2{
+  color: #d1582b;
+  text-align: center
+}
+.post_container p{
+ color: #e4dfc2;
+  text-align: center
+}
+.post_container strong{
+  color: #6a4944;
+   text-align: center
+ }
+a span{
+  text-decoration: none;
+color: #6a4944;
+}
+a strong{
+  text-decoration: none;
+  color: #6a4944;
+}
+.active{
   background-color: #6a4944;
   color: #d1582b;
   height: 10vh;
+  width: 10vw
 }

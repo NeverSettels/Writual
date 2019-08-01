@@ -1,4 +1,5 @@
 import React from 'react'
+import { styles } from "../../../../StyleMaps";
 
 function BlockStyleButton(props) {
   const onToggle = e => {
@@ -6,15 +7,17 @@ function BlockStyleButton(props) {
     props.onToggle(props.style)
   }
 
-  let className = 'RichEditor-styleButton'
+  let style
   if (props.active) {
-    className += ' RichEditor-activeButton'
+    style = { ...styles.styleButton, color: 'black' }
+  } else {
+    style = styles.styleButton
   }
 
   return (
-    <button className={className} onClick={onToggle}>
+    <span style={style} onClick={onToggle}>
       {props.label}
-    </button>
+    </span>
   )
 }
 

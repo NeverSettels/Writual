@@ -6,7 +6,7 @@ import ColorStyleButton from './ColorStyleButton'
 const ColorControls = props => {
   var currentStyle = props.editorState.getCurrentInlineStyle()
   return (
-    <div style={styles.controls}>
+    <span style={styles.controls}>
       {COLORS.map(type => (
         <ColorStyleButton
           key={type.label}
@@ -16,7 +16,7 @@ const ColorControls = props => {
           style={type.style}
         />
       ))}
-    </div>
+    </span>
   )
 }
 

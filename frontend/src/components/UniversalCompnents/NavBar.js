@@ -10,16 +10,16 @@ export default function NavBar(props) {
 
   return (
     <nav className="nav-bar">
-      <Link activeClassName="active" to="/">
+      <NavLink to="/">
         <img style={{ height: '10vh' }} src="/logo.PNG" alt="" />
-      </Link>
+      </NavLink>
       {console.log(context.state)}
-      {context.state.user ? (
+      {context.state.user && context.state.isLogged ? (
         <>
-          <NavLink activeClassName="active" to={`/profile/${context.state.user._id}`}>
+          <NavLink to={`/profile/${context.state.user._id}`}>
             <span>Profile</span>
           </NavLink>
-          <NavLink activeClassName="active" to="/create">
+          <NavLink to="/create">
             <span>Create</span>
           </NavLink>
           <Logout />

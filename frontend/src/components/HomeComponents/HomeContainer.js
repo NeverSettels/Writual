@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Empty } from 'antd'
 import Axios from 'axios'
 import Post from '../UniversalCompnents/Post'
 import { CATEGORIES } from '../../Types'
@@ -76,9 +76,20 @@ export default function HomeContainer() {
       </Sider>
       <Layout style={{ marginLeft: 200 }}>
         <Content style={{ height: '90vh', margin: '10vh 16px 0', overflow: 'initial' }}>
-          {posts.map(post => (
+          {posts.length === 0 ? <Empty
+            image="./writer.png"
+            imageStyle={{
+              height: 60,
+            }}
+            description={
+              <span>
+                Oops no posts yet, go write some, or come back later!
+      </span>
+            }
+          /> : posts.map(post => (
             <Post key={post._id} post={post} context={context} />
           ))}
+
         </Content>
       </Layout>
     </Layout>
