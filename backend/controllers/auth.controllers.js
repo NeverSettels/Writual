@@ -42,7 +42,7 @@ exports.update = (req, res, next) => {
 
 exports.getProfile = (req, res, next) => {
   const { id } = req.params
-  User.findOne({ _id: id }).populate('posts')
+  User.findOne({ _id: id }).populate('posts', 'bookmarked')
     .then(user => res.status(200).json({ user }))
     .catch(err => res.status(401).json({ err }))
 }

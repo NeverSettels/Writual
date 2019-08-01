@@ -7,7 +7,7 @@ const {
   updatePost,
   deletePost,
   getByCategory,
-  getUserPosts
+
 } = require('../controllers/postControllers')
 const { verifyToken } = require('../config/jwt')
 
