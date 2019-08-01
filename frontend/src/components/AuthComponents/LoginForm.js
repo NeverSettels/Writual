@@ -5,6 +5,7 @@ import { Modal } from 'antd'
 import { MyContext } from '../../context'
 
 export default function LoginForm() {
+
   const [form, handleInputs] = useForm()
   const authService = new AuthService()
   const [visible, setvisible] = useState(false)
@@ -42,6 +43,7 @@ export default function LoginForm() {
       <span type="primary" onClick={showModal}>
         Login
       </span>
+
       <Modal title="Login" visible={visible} onOk={handleOk} confirmLoading={confirmLoading} onCancel={handleCancel}>
         <input type="email" name="email" placeholder="Enter you email" onChange={e => handleInputs(e)} />
         <input type="password" name="password" placeholder="Enter you password" onChange={e => handleInputs(e)} />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Layout, Avatar, Menu } from 'antd'
+import { Layout, Avatar, Menu, Empty } from 'antd'
 import Axios from 'axios'
 
 import { MyContext } from '../../context'
@@ -37,7 +37,6 @@ export default function ProfileContainer(props) {
 
 
   const handleClick = e => {
-    console.log('click ', e);
     setcurrent(e.key)
     setpostsOrBookmarked(prevState => !prevState)
 
@@ -63,6 +62,7 @@ export default function ProfileContainer(props) {
       >
         <Avatar size={80} src={user.profilePic} />
         <h2>{user.username}</h2>
+        <h3>Bio:</h3>
         <div><p>{user.bio}</p></div>
         {context.state.user._id === user._id && !mine ? setmine(true) : ''}
         {mine ? <EditProfileForm user={user} setUser={setUser} /> : ''}
@@ -79,7 +79,29 @@ export default function ProfileContainer(props) {
               Bookmarked
         </Menu.Item>
           </Menu>
-          {postsOrBookmarked ? posts.map(post => (<ProfilePost post={post} user={user} mine={mine} />)) : bookmarked.map(post => (<ProfilePost post={post} user={user} mine={false} />))}
+          {posts.length === 0 && postsOrBookmarked ? <Empty
+            image="https://image.flaticon.com/icons/svg/1995/1995562.svg"
+            imageStyle={{
+              height: 60,
+            }}
+            description={
+              <span>
+                Oops no posts yet, go write some!
+            </span>
+            }
+          /> : ''}
+          {posts.length === 0 && !postsOrBookmarked ? <Empty
+            image="https://image.flaticon.com/icons/svg/864/864702.svg"
+            imageStyle={{
+              height: 60,
+            }}
+            description={
+              <span>
+                Nothing Bookmarked yet, go read something!
+            </span>
+            }
+          /> : ''}
+          {postsOrBookmarked ? posts.map(post => (<ProfilePost key={post._id} post={post} user={user} mine={mine} />)) : bookmarked.map(post => (<ProfilePost key={post._id} post={post} user={user} mine={false} />))}
         </Content>
       </Layout>
     </Layout>

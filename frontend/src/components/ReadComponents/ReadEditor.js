@@ -98,6 +98,7 @@ export default function ReadEditor(props) {
           Histprops={props}
           post={post}
         />
+        <hr />
       </div> : ''}
 
       <div>

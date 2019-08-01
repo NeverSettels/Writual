@@ -20,13 +20,13 @@ export default function ProfilePost(props) {
                 <h2>{post.title}</h2>
                 <p>{post.summary}</p>
                 {post.categories.map(category => (
-                    <Tag>{category}</Tag>
+                    <Tag key={category}>{category}</Tag>
                 ))}
             </div>
             <div>
                 {mine ? <DeletePost post={post} /> : ''}
                 <p>{post.numBookmarks}</p>
-                <Link to={`/read/${post._id}`}> <img style={{ witdh: '100px' }} src="https://image.flaticon.com/icons/svg/864/864702.svg" alt="book" /></Link>
+                <Link to={`/read/${post._id}`}> <img style={{ height: '34px' }} src="https://image.flaticon.com/icons/svg/864/864702.svg" alt="book" /></Link>
             </div>
         </div>
     )

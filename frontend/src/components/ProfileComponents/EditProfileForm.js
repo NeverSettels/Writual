@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import useForm from '../../Hooks/useForm'
-import { Modal } from 'antd'
+import { Modal, Button } from 'antd'
 import Axios from 'axios';
 export default function EditProfileForm(props) {
     const { user, setUser } = props
@@ -32,11 +32,11 @@ export default function EditProfileForm(props) {
 
     return (
         <div>
-            <span onClick={showModal}>Edit Profile</span>
+            <Button onClick={showModal}>Edit Profile</Button>
             <Modal title="Edit" visible={visible} onOk={handleOk} confirmLoading={confirmLoading} onCancel={handleCancel}>
                 <input type="text" name="username" placeholder="Change your pen name" onChange={e => handleInputs(e)} />
                 <input type="email" name="email" placeholder="Update email" onChange={e => handleInputs(e)} />
-                <input type="text" placeholder="Up date your bio" name="bio" onChange={e => handleInputs(e)} />
+                <input type="text" placeholder="Update your bio" name="bio" onChange={e => handleInputs(e)} />
             </Modal>
         </div>
     )

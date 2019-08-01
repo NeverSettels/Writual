@@ -34,7 +34,7 @@ export default function PublishModal(props) {
     setTimeout(() => {
       setvisible(false)
       setconfirmLoading(false)
-      Histprops.props.history.push('/profile')
+      Histprops.props.history.push('/')
     }, 3000)
   }
 

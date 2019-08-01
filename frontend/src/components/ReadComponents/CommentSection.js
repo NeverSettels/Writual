@@ -67,9 +67,9 @@ export default function CommentSection(props) {
       Axios.get(`https://writualapp.herokuapp.com/comments/${post._id}`)
         .then(({ data }) => {
           if (data.comment) {
-            let commentData = []
+            //let commentData = []
 
-            data.comment.content.map(e => commentData.push(e[0].content[0])) /*setComment(data.comments.content)*/
+            //data.comment.content.map(e => commentData.push(e[0].content[0])) /*setComment(data.comments.content)*/
 
             //setComment(commentData)
           }

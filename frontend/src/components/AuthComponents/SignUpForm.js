@@ -3,6 +3,7 @@ import useForm from '../../Hooks/useForm'
 import AuthService from '../../services/auth'
 import { Modal } from 'antd'
 
+
 export default function SignUpForm() {
   const [form, handleInputs] = useForm()
   const authService = new AuthService()
@@ -28,6 +29,7 @@ export default function SignUpForm() {
     setTimeout(() => {
       setvisible(false)
       setconfirmLoading(false)
+
     }, 2000)
   }
 

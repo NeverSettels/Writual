@@ -24,8 +24,9 @@ code {
 
 .nav-bar span:hover {
   cursor: pointer;
-  background-color: #6a4944;
+  
   color: #d1582b;
+ 
 }
 .nav-bar div span {
   height: 10vh;
@@ -59,9 +60,9 @@ code {
   color: #6a4944;
    text-align: center
  }
-a span{
+ a span{
   text-decoration: none;
-color: #6a4944;
+  color: #6a4944;
 }
 a strong{
   text-decoration: none;
@@ -72,4 +73,8 @@ a strong{
   color: #d1582b;
   height: 10vh;
   width: 10vw
+}
+a.active span{
+  text-decoration: none;
+  color: #d1582b;
 }

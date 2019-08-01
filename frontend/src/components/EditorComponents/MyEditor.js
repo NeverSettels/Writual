@@ -105,16 +105,6 @@ export default function MyEditor(props) {
         Histprops={props}
         saveto={'posts'}
       />
-      <PublishModal
-        contentState={contentState}
-        setContentState={setContentState}
-        save={save}
-        user={user}
-        Histprops={props}
-        saveto={'drafts'}
-      />
-
-
 
       <div style={styles.editor}>
         <Editor

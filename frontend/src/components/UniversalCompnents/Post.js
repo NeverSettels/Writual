@@ -20,7 +20,6 @@ export default function Post(props) {
         const { user } = res.data
         setUser(user)
         if (user.bookmarked) {
-          console.log(user)
           let bool = false
           user.bookmarked.map(marked => {
             if (post._id === marked) {
@@ -84,7 +83,7 @@ export default function Post(props) {
         <p>{post.summary}</p>
         <div>
           {post.categories.map(category => (
-            <Tag>{category}</Tag>
+            <Tag key={category}>{category}</Tag>
           ))}
         </div>
       </div>

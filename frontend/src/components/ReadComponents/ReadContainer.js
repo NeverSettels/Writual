@@ -33,18 +33,23 @@ export default function ReadContainer(props) {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          alignContent: 'center'
         }}
       >
         {post.postedBy !== undefined ? <Avatar size={80} src={post.postedBy.profilePic} /> : ''}
         {post.postedBy !== undefined ? <h2>{post.postedBy.username}</h2> : ''}
+        <h3>Summary:</h3>
+        {post.postedBy !== undefined ? <p>{post.summary}</p> : ''}
+        <h3>Categories:</h3>
         <div>
           {post.categories !== undefined ? post.categories.map(category => (
-            <Tag>{category}</Tag>
+            <Tag key={category}>{category}</Tag>
           )) : ""}
         </div>
         {post.postedBy !== undefined ? context.state.user._id === post.postedBy._id && !edit ? <Button onClick={canEdit}>edit</Button> : '' : ''}
-        {edit ? <div><button onClick={cancel}>Cancel</button></div> : ''}
+        {edit ? <Button type='danger' onClick={cancel}>Cancel</Button > : ''}
+
       </Sider>
       <Layout style={{ marginLeft: 200, marginTop: '10vh' }}>
         <Content style={{ height: '100vh', margin: '24px 16px 0', overflow: 'initial' }}>
@@ -53,7 +58,8 @@ export default function ReadContainer(props) {
             <ReadEditor post={post} setpost={setpost} match={match} setEdit={setEdit} edit={edit} user={post.postedBy} />
           </div>
         </Content>
-        <CommentSection post={post} />
+        {post.postedBy !== undefined ? context.state.user._id === post.postedBy._id ? <CommentSection post={post} /> : '' : ''}
+
       </Layout>
     </Layout>
   )

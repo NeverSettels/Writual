@@ -5,12 +5,12 @@ import Post from '../UniversalCompnents/Post'
 import { CATEGORIES } from '../../Types'
 import { MyContext } from '../../context'
 
+
 const { Content, Sider } = Layout
 
 export default function HomeContainer() {
   const context = useContext(MyContext)
   const [posts, setposts] = useState([])
-
   useEffect(() => {
     Axios.get('https://writualapp.herokuapp.com/posts')
       .then(({ data }) => {
@@ -57,7 +57,7 @@ export default function HomeContainer() {
           mode="inline"
           defaultSelectedKeys={['4']}
         >
-          <h2 style={{ color: '#D4dfc2' }}>Catgories</h2>
+          <h2 style={{ color: '#D4dfc2' }}>Categories</h2>
           <Menu.Item>
             <h2 className="nav-text" style={{ color: '#D4dfc2' }} onClick={filterAll}>
               <u>All</u>
@@ -77,14 +77,14 @@ export default function HomeContainer() {
       <Layout style={{ marginLeft: 200 }}>
         <Content style={{ height: '90vh', margin: '10vh 16px 0', overflow: 'initial' }}>
           {posts.length === 0 ? <Empty
-            image="./writer.png"
+            image='./writer.png'
             imageStyle={{
               height: 60,
             }}
             description={
               <span>
                 Oops no posts yet, go write some, or come back later!
-      </span>
+            </span>
             }
           /> : posts.map(post => (
             <Post key={post._id} post={post} context={context} />

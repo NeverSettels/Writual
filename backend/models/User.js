@@ -25,7 +25,10 @@ const userSchema = new Schema(
     drafts: [{ type: Schema.Types.ObjectId, ref: 'Draft' }], // Draft ids
     following: [{ type: Schema.Types.ObjectId, ref: 'User' }], // Following ids
     bookmarked: [{ type: Schema.Types.ObjectId, ref: 'Post' }], // Bookmarked Posts object
-    bio: String
+    bio: {
+      type: String,
+      default: "A Creative writer is using the default bio! booooo!"
+    }
   },
   {
     timestamps: true,
